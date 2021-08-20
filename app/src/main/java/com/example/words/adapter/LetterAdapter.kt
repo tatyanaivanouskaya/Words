@@ -1,13 +1,16 @@
 package com.example.words.adapter
 
-import android.content.Intent
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.words.DetailActivity
+import com.example.words.LetterListFragmentDirections
 import com.example.words.R
+
 
 class LetterAdapter: RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
 
@@ -26,10 +29,9 @@ class LetterAdapter: RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
         holder.buttonItem.text = list[position].toString()
         holder.buttonItem.setOnClickListener {
-            val context = holder.buttonItem.context
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.LETTER, holder.buttonItem.text.toString())
-            context.startActivity(intent)
+            val action = LetterListFragmentDirections
+                .actionLetterListFragmentToWordListFragment(holder.buttonItem.text.toString())
+            holder.itemView.findNavController().navigate(action)
         }
     }
 

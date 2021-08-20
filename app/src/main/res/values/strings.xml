@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Words</string>
     <string name="action_switch_layout">Switch</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="letter_list_fragment">Letters</string>
+    <string name="word_list_fragment">Words that starts with {letter}</string>
 </resources>

@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
-import com.example.words.DetailActivity
 import com.example.words.R
+import com.example.words.WordListFragment
 
-class WordAdapter(private val letter: String, val context: Context):
+class WordAdapter(private val letter: String, private val context: Context):
     RecyclerView.Adapter<WordAdapter.WordVieHolder>() {
 
-    lateinit var filteredWords: List<String>
+    private var filteredWords: List<String>
     init {
         val words = context.resources.getStringArray(R.array.words).toList()
         filteredWords = words
@@ -25,7 +25,7 @@ class WordAdapter(private val letter: String, val context: Context):
     }
 
     class WordVieHolder(view: View): RecyclerView.ViewHolder(view){
-        val button = view.findViewById<Button>(R.id.button_item)
+        val button: Button = view.findViewById(R.id.button_item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordVieHolder {
@@ -38,7 +38,7 @@ class WordAdapter(private val letter: String, val context: Context):
         holder.button.text = filteredWords[position]
 
         holder.button.setOnClickListener {
-            val queryUrl: Uri = Uri.parse("${DetailActivity.SEARCH}${filteredWords[position]}")
+            val queryUrl: Uri = Uri.parse("${WordListFragment.SEARCH}${filteredWords[position]}")
             val intent = Intent(Intent.ACTION_VIEW,queryUrl)
             context.startActivity(intent)
         }
